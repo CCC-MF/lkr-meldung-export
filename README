@@ -1,0 +1,11 @@
+Anwendung zum Export von LKR-Meldungen aus Onkostar
+
+Diese Anwendung exportiert Meldungen an das LKR aus der Onkostar-Tabelle 'lkr_meldung_export'
+und fasst dabei Patienten- und Melder-Informationen für eine Export-ID in einer Datei zusammen.
+
+Optionen:
+  -U, --user        Der zu verwendende Nutzername für die Datenbank
+  -P, --password    Das zu verwendende Passwort für die Datenbank
+  -H, --host        Der Hostname des Datenbankservers (Standardwert: localhost)
+      --port        Der Netzwerkport der Datenbank (Standardwert: 3306)
+  -D, --database    Der Name der Datenbank/des Datenbankschemas (Standardwert: onkostar)
