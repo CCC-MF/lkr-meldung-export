@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ADT_GEKID xmlns="http://www.gekid.de/namespace" Schema_Version="2.1.1">
-    <Absender Absender_ID="TESTKLINIK" SOFTWARE_ID="lkr_export" Installations_ID="undefined">
+    <Absender Absender_ID="TESTKLINIK" SOFTWARE_ID="lkr-meldung-export" Installations_ID="1.0.0">
         <Absender_Bezeichnung>TESTKLINIK</Absender_Bezeichnung>
         <Absender_Ansprechpartner>Patrick Tester</Absender_Ansprechpartner>
         <Absender_Anschrift>Musterstraße 1, 12345 Musterhausen</Absender_Anschrift>

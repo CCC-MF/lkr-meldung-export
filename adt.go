@@ -56,16 +56,23 @@ func ToMergedString(content []AdtGekid) (string, error) {
 	var melder = []string{}
 
 	for _, entry := range content {
+		patchedAbsenderString := entry.ToAbsenderString()
+		reSoftwareID := regexp.MustCompile("SOFTWARE_ID=\"[^\"]+\"")
+		patchedAbsenderString = reSoftwareID.ReplaceAllString(patchedAbsenderString, "SOFTWARE_ID=\"lkr-meldung-export\"")
+		reInstallationID := regexp.MustCompile("Installations_ID=\"[^\"]+\"")
+		patchedAbsenderString = reInstallationID.ReplaceAllString(patchedAbsenderString, "Installations_ID=\"1.0.0\"")
+
 		if schema_version == "" {
 			schema_version = entry.ToSchemaVersionString()
 		}
 		if absender == "" {
-			absender = entry.ToAbsenderString()
+			absender = patchedAbsenderString
 		}
 		if schema_version != entry.ToSchemaVersionString() {
 			return "", fmt.Errorf("Verschiedene Schema-Versionen")
 		}
-		if absender != entry.ToAbsenderString() {
+
+		if absender != patchedAbsenderString {
 			return "", fmt.Errorf("Verschiedene Absender")
 		}
 

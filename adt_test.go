@@ -133,5 +133,4 @@ func TestShouldMergeAdtFiles(t *testing.T) {
 		t.Logf("Result did not match expected value")
 		t.Fail()
 	}
-
 }
