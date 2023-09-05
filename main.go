@@ -25,9 +25,11 @@
 package main
 
 import (
+	"crypto/tls"
 	"database/sql"
 	"fmt"
 	"github.com/alecthomas/kong"
+	"github.com/go-sql-driver/mysql"
 	_ "github.com/go-sql-driver/mysql"
 	"golang.org/x/term"
 	"log"
@@ -73,7 +75,18 @@ func main() {
 		println()
 	}
 
-	if dbx, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?tls=skip-verify", cli.User, cli.Password, cli.Host, cli.Port, cli.Database)); err == nil {
+	dbCfg := mysql.Config{
+		User:                 cli.User,
+		Passwd:               cli.Password,
+		Net:                  "tcp",
+		Addr:                 fmt.Sprintf("%s:%d", cli.Host, cli.Port),
+		DBName:               cli.Database,
+		AllowNativePasswords: true,
+		TLSConfig:            "skip-verify",
+		TLS:                  &tls.Config{MinVersion: tls.VersionTLS10, MaxVersion: tls.VersionTLS13},
+	}
+
+	if dbx, err := sql.Open("mysql", dbCfg.FormatDSN()); err == nil {
 		if err := dbx.Ping(); err == nil {
 			db = dbx
 			defer func(db *sql.DB) {
